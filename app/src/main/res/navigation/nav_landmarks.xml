@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/landmarksFragment"
-        android:name="com.example.landmarkremark.LandmarksFragment"
+        android:name="com.example.landmarkremark.fragment.main.LandmarksFragment"
         android:label="fragment_landmarks"
         tools:layout="@layout/fragment_landmarks" />
 </navigation>

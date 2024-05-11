@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.landmarkremark.MapFragment"
+        android:name="com.example.landmarkremark.fragment.main.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
 </navigation>
