@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<account-authenticator android:smallIcon="@mipmap/ic_launcher"
+    android:label="LandmarkRemark"
+    android:icon="@mipmap/ic_launcher"
+    android:accountType="com-example-landmarkremark"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+

@@ -1,5 +1,6 @@
 package com.example.landmarkremark.viewmodel.not_login
 
+import android.view.View
 import androidx.lifecycle.viewModelScope
 import com.example.landmarkremark.viewmodel.BaseViewModel
 import com.google.firebase.database.DataSnapshot
@@ -17,7 +18,7 @@ class NotLoginViewModel : BaseViewModel() {
     fun getAccountNameIsRegistered(getAccountNameList: (List<String>) -> Unit) {
         updateLoading(true)
         val dataNodeReference = databaseReference.child("data").child("account")
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             dataNodeReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val accountNameList = mutableListOf<String>()
@@ -27,7 +28,7 @@ class NotLoginViewModel : BaseViewModel() {
                             accountNameList.add(accountName)
                         }
                     }
-                    getAccountNameList (accountNameList) // get all account name that is registered in database
+                    getAccountNameList(accountNameList) // get all account name that is registered in database
                     updateLoading(false)
                 }
 
@@ -44,7 +45,8 @@ class NotLoginViewModel : BaseViewModel() {
         registerSuccess: (Boolean) -> Unit
     ) {
         updateLoading(true)
-        databaseReference.child("data").child("account").child(userName).setValue(password) // upload user name and password
+        databaseReference.child("data").child("account").child(userName)
+            .setValue(password) // upload user name and password
             .addOnSuccessListener {
                 registerSuccess(true)
                 updateLoading(false)
@@ -54,5 +56,28 @@ class NotLoginViewModel : BaseViewModel() {
                 updateLoading(false)
             }
 
+    }
+
+    fun getUserPassword (userName: String, getPasswordValue: (String?) -> Unit) {
+        val dataNodeReference = databaseReference.child("data").child("account")
+        updateLoading(true)
+        viewModelScope.launch(Dispatchers.IO) {
+            dataNodeReference.orderByKey().equalTo(userName)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if (dataSnapshot.hasChild(userName)) {
+                            val passwordValue = dataSnapshot.child(userName).value
+                            getPasswordValue(passwordValue as? String)
+                        } else {
+                            getPasswordValue(null)
+                        }
+                        updateLoading(false)
+                    }
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        getPasswordValue(null)
+                        updateLoading(false)
+                    }
+                })
+        }
     }
 }
