@@ -4,6 +4,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="registerViewModel"
             type="com.example.landmarkremark.viewmodel.not_login.NotLoginViewModel" />
@@ -36,7 +37,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_layout_ed_username"
+            android:id="@+id/register_layout_ed_username"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +54,7 @@
             bind:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_ed_username"
+                android:id="@+id/register_ed_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -63,7 +64,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_layout_ed_password"
+            android:id="@+id/register_layout_ed_password"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,10 +79,10 @@
             bind:boxStrokeColor="@color/black"
             app:counterMaxLength="20"
             android:layout_marginEnd="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/login_layout_ed_username">
+            app:layout_constraintTop_toBottomOf="@+id/register_layout_ed_username">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_ed_password"
+                android:id="@+id/register_ed_password"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:inputType="textPassword"
@@ -91,7 +92,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_layout_ed_confirm_pass"
+            android:id="@+id/register_layout_ed_confirm_pass"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,10 +107,10 @@
             bind:boxStrokeColor="@color/black"
             app:counterMaxLength="20"
             android:layout_marginEnd="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/login_layout_ed_password">
+            app:layout_constraintTop_toBottomOf="@+id/register_layout_ed_password">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_ed_confirm_pass"
+                android:id="@+id/register_ed_confirm_pass"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:inputType="textPassword"
@@ -119,7 +120,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/login_bt_register"
+            android:id="@+id/register_bt_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/red"
@@ -130,7 +131,7 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_layout_ed_confirm_pass" />
+            app:layout_constraintTop_toBottomOf="@+id/register_layout_ed_confirm_pass" />
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -146,6 +147,15 @@
             android:layout_height="1dp"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.4" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{registerViewModel.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
