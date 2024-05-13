@@ -1,121 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
-    android:backgroundTint="@color/grey1"
-    android:layout_margin="10dp"
-    android:elevation="30dp">
-    <androidx.constraintlayout.widget.ConstraintLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="landmarkInfo"
+            type="com.example.landmarkremark.model.LandmarkInformation" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:backgroundTint="@color/grey1"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/ic_place"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_place"
-            app:layout_constraintTop_toTopOf="@id/tv_place_name"
-            app:layout_constraintBottom_toBottomOf="@id/tv_place_name"
-            app:layout_constraintStart_toStartOf="parent"/>
-        <TextView
-            android:id="@+id/tv_place_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hac Dich"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ic_place"/>
+        android:elevation="30dp">
 
-        <LinearLayout
-            android:id="@+id/layout_linear_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="15dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_place_name"
-            app:layout_constraintStart_toStartOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ic_place"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_place"
+                app:layout_constraintTop_toTopOf="@id/tv_place_name"
+                app:layout_constraintBottom_toBottomOf="@id/tv_place_name"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <TextView
-                android:id="@+id/tv_lat"
+                android:id="@+id/tv_place_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Latitude:"
+                android:text="@{landmarkInfo.name}"
                 android:textSize="18sp"
                 android:textColor="@color/black"
+                android:layout_marginStart="10dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ic_place"/>
+                app:layout_constraintStart_toEndOf="@id/ic_place" />
 
-            <TextView
-                android:id="@+id/tv_lng"
+            <LinearLayout
+                android:id="@+id/layout_linear_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Longitude:"
-                android:textSize="18sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ic_place"/>
+                android:orientation="vertical"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_place_name"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
-                android:id="@+id/tv_username"
+                <TextView
+                    android:id="@+id/tv_lat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Latitude:"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ic_place" />
+
+                <TextView
+                    android:id="@+id/tv_lng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Longitude:"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ic_place" />
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User name:"
+                    android:layout_marginTop="5dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ic_place" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_linear_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User name:"
-                android:layout_marginTop="5dp"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ic_place"/>
-        </LinearLayout>
+                android:orientation="vertical"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_place_name"
+                app:layout_constraintStart_toEndOf="@id/layout_linear_1">
 
-        <LinearLayout
-            android:id="@+id/layout_linear_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_place_name"
-            app:layout_constraintStart_toEndOf="@id/layout_linear_1">
-            <TextView
-                android:id="@+id/tv_lat_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.34873"
-                android:textSize="18sp"
-                android:textStyle="italic"
-                android:textColor="@color/green"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ic_place"/>
+                <TextView
+                    android:id="@+id/tv_lat_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{landmarkInfo.lat.toString()}"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:textColor="@color/green"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ic_place" />
 
-            <TextView
-                android:id="@+id/tv_lng_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.38473"
-                android:textSize="18sp"
-                android:textStyle="italic"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/green"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ic_place"/>
+                <TextView
+                    android:id="@+id/tv_lng_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{landmarkInfo.lng.toString()}"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/green"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ic_place" />
 
-            <TextView
-                android:id="@+id/tv_username_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="kha"
-                android:layout_marginTop="5dp"
-                android:textStyle="italic"
-                android:textSize="18sp"
-                android:textColor="@color/green"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ic_place"/>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_username_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{landmarkInfo.userName}"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:textColor="@color/green"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ic_place" />
+            </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</layout>
