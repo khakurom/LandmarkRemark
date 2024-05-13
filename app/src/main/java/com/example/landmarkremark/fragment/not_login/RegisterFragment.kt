@@ -8,6 +8,7 @@ import com.example.landmarkremark.BR
 import com.example.landmarkremark.R
 import com.example.landmarkremark.databinding.FragmentRegisterBinding
 import com.example.landmarkremark.fragment.BaseFragment
+import com.example.landmarkremark.util.DialogHelper.Companion.showAlertDialog
 import com.example.landmarkremark.util.SingleClickListener
 import com.example.landmarkremark.util.Utils.isNetworkAvailable
 import com.example.landmarkremark.viewmodel.not_login.NotLoginViewModel
@@ -46,7 +47,7 @@ class RegisterFragment :
         if (isNetworkAvailable(requireContext())) {
             validateAccountInformation()
         } else {
-            showAlertDialog("Network is not available")
+            showAlertDialog(requireContext(),"Network is not available")
         }
     }
 
@@ -57,19 +58,19 @@ class RegisterFragment :
             val confirmPassword = registerEdConfirmPass.text?.trim().toString()
 
             if (userName.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                showAlertDialog("Please fill full your information")
+                showAlertDialog(requireContext(),"Please fill full your information")
             } else {
                 // check length of account name and password
                 if (userName.length < 3) {
-                    showAlertDialog("Your account name must be larger than 2 characters")
+                    showAlertDialog(requireContext(),"Your account name must be larger than 2 characters")
                 } else if (password.length < 4) {
-                    showAlertDialog("Your password must be larger than 3 characters")
+                    showAlertDialog(requireContext(),"Your password must be larger than 3 characters")
                 } else {
                     // check confirm password
                     if (password == confirmPassword) {
                         checkAccountNameRegistered(userName)
                     } else {
-                        showAlertDialog("Your confirm password does not match")
+                        showAlertDialog(requireContext(),"Your confirm password does not match")
                     }
                 }
             }
@@ -80,7 +81,7 @@ class RegisterFragment :
     private fun checkAccountNameRegistered(userName: String) {
         viewModel?.getAccountNameIsRegistered { accountNameList ->
             if (accountNameList.contains(userName)) {
-                showAlertDialog("This account name is registered. Please use another name")
+                showAlertDialog(requireContext(),"This account name is registered. Please use another name")
             } else {
                 registerAccount(userName, binding.registerEdPassword.text.toString().trim())
             }
@@ -95,25 +96,12 @@ class RegisterFragment :
                 if (isSuccess) {
                     showAlertDialogRegisterSuccess ()
                 } else {
-                    showAlertDialog ("Register account unsuccessfully")
+                    showAlertDialog (requireContext(),"Register account unsuccessfully")
                 }
             }
         )
     }
 
-
-    private fun showAlertDialog(message: String) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Error")
-        builder.setMessage(message)
-
-        builder.setPositiveButton("OK") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
 
     private fun showAlertDialogRegisterSuccess () {
         val builder = AlertDialog.Builder(requireContext())

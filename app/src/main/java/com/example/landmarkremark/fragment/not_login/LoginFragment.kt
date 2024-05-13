@@ -12,6 +12,7 @@ import com.example.landmarkremark.databinding.FragmentLoginBinding
 import com.example.landmarkremark.fragment.BaseFragment
 import com.example.landmarkremark.util.Constant.KEY_USER_NAME
 import com.example.landmarkremark.util.DelegatedPreferences
+import com.example.landmarkremark.util.DialogHelper.Companion.showAlertDialog
 import com.example.landmarkremark.util.SingleClickListener
 import com.example.landmarkremark.util.Utils.isNetworkAvailable
 import com.example.landmarkremark.util.authenticate.UserManager
@@ -46,7 +47,7 @@ class LoginFragment :
         if (isNetworkAvailable(requireContext())) {
             validateLoginInformation()
         } else {
-            showAlertDialog("Network is not available")
+            showAlertDialog(requireContext(),"Network is not available")
         }
     }
 
@@ -55,7 +56,7 @@ class LoginFragment :
             val userName = loginEdUsername.text.toString().trim()
             val password = loginEdPassword.text.toString().trim()
             if (userName.isEmpty() || password.isEmpty()) {
-                showAlertDialog("Please fill full your information")
+                showAlertDialog(requireContext(),"Please fill full your information")
             } else {
                 loginAccount(userName, password)
             }
@@ -73,22 +74,10 @@ class LoginFragment :
                     startActivity(Intent(requireContext(),MainActivity::class.java))
                     activity?.finish()
                 } else {
-                    showAlertDialog("Your account information is incorrect")
+                    showAlertDialog(requireContext(),"Your account information is incorrect")
                 }
             })
     }
 
-    private fun showAlertDialog(message: String) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Error")
-        builder.setMessage(message)
-
-        builder.setPositiveButton("OK") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
 
 }

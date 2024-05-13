@@ -27,6 +27,7 @@ import com.example.landmarkremark.model.LandmarkInformation
 import com.example.landmarkremark.util.Constant
 import com.example.landmarkremark.util.DelegatedPreferences
 import com.example.landmarkremark.util.DialogAddLandmark
+import com.example.landmarkremark.util.DialogHelper
 import com.example.landmarkremark.util.SingleClickListener
 import com.example.landmarkremark.util.Utils
 import com.example.landmarkremark.util.authenticate.UserManager
@@ -152,7 +153,7 @@ class MapFragment : BaseFragment<MainViewModel, FragmentMapBinding>(R.layout.fra
 				}
 			}
 		} else {
-			showAlertDialog("Network is not available")
+			DialogHelper.showAlertDialog(requireContext(), "Network is not available")
 		}
 	}
 
@@ -207,7 +208,7 @@ class MapFragment : BaseFragment<MainViewModel, FragmentMapBinding>(R.layout.fra
 			)
 			mMap.addMarker(markerOptions)
 		} else {
-			showAlertDialog("Network is not available")
+			DialogHelper.showAlertDialog(requireContext(), "Network is not available")
 		}
 	}
 
@@ -271,18 +272,6 @@ class MapFragment : BaseFragment<MainViewModel, FragmentMapBinding>(R.layout.fra
 		dialog.show()
 	}
 
-	private fun showAlertDialog(message: String) {
-		val builder = AlertDialog.Builder(requireContext())
-		builder.setTitle("Error")
-		builder.setMessage(message)
-
-		builder.setPositiveButton("OK") { dialog, _ ->
-			dialog.dismiss()
-		}
-
-		val dialog: AlertDialog = builder.create()
-		dialog.show()
-	}
 
 	private fun logoutAccount() {
 		UserManager.getInstance(requireContext()).removeAccount()

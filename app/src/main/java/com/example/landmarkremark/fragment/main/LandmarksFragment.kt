@@ -9,6 +9,7 @@ import com.example.landmarkremark.R
 import com.example.landmarkremark.adapter.LandmarkAdapter
 import com.example.landmarkremark.databinding.FragmentLandmarksBinding
 import com.example.landmarkremark.fragment.BaseFragment
+import com.example.landmarkremark.util.DialogHelper.Companion.showAlertDialog
 import com.example.landmarkremark.util.Utils
 import com.example.landmarkremark.viewmodel.main.MainViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -64,7 +65,7 @@ class LandmarksFragment :
 		if (Utils.isNetworkAvailable(requireContext())) {
 			viewModel?.retrieveUserLandmark()
 		} else {
-			showAlertDialog("Network is not available")
+			showAlertDialog(requireContext(),"Network is not available")
 		}
 	}
 
@@ -83,16 +84,5 @@ class LandmarksFragment :
 		}
 	}
 
-	private fun showAlertDialog(message: String) {
-		val builder = AlertDialog.Builder(requireContext())
-		builder.setTitle("Error")
-		builder.setMessage(message)
 
-		builder.setPositiveButton("OK") { dialog, _ ->
-			dialog.dismiss()
-		}
-
-		val dialog: AlertDialog = builder.create()
-		dialog.show()
-	}
 }
