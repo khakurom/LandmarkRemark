@@ -4,6 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
             name="mapViewModel"
             type="com.example.landmarkremark.viewmodel.main.MainViewModel" />
@@ -25,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
-                android:id="@+id/location_tv_user_name"
+                android:id="@+id/map_tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
@@ -36,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/location_bt_logout"
+                android:id="@+id/map_bt_logout"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:background="@color/red"
@@ -59,17 +61,52 @@
             app:layout_constraintTop_toBottomOf="@id/layout_user_info"
             tools:context=".presentation.fragment.main.location.LocationFragment" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/location_bt_open_feature"
-            android:layout_width="200dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:background="@color/green"
-            android:text="Save landmark"
-            android:textColor="@color/white"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/map_btn_save_landmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/green"
+                android:text="Add landmark"
+                android:textColor="@color/white"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/map_btn_get_current_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:layout_marginStart="5dp"
+                android:paddingEnd="10dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/red"
+                android:text="Your location"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{mapViewModel.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
